@@ -1,0 +1,35 @@
+nav {
+  display: flex;
+  background-color: #fff;
+  justify-content: space-between;
+  padding: 1.813rem 6.25rem;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.left-nav {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.left-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+
+.left-nav ul li {
+  font-size: 0.813rem;
+  color: #121212;
+}
+
+.left-nav .logo {
+  color: #0290ff;
+  font-size: 1.875rem;
+  font-weight: bold;
+}
