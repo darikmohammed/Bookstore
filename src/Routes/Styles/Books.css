@@ -1,0 +1,12 @@
+.horizontal-line {
+  width: 85%;
+  height: 0.125rem;
+  margin: 2.5rem 0 1.813rem 0;
+  background-color: #e8e8e8;
+  align-self: center;
+}
+
+.books {
+  display: flex;
+  flex-direction: column;
+}
