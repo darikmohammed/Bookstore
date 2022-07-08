@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Nav from '../Components/Nav';
 import Book from '../Components/Book';
+import NewBook from '../Components/NewBook';
+import './Styles/Books.css';
 
 function Books() {
   const [books] = useState([
@@ -24,7 +26,7 @@ function Books() {
     },
   ]);
   return (
-    <div>
+    <div className="books">
       <Nav />
       {books.map((book) => (
         <Book
@@ -35,6 +37,8 @@ function Books() {
           progress={book.progress}
         />
       ))}
+      <div className="horizontal-line" />
+      <NewBook />
     </div>
   );
 }
