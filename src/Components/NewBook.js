@@ -7,15 +7,17 @@ function NewBook() {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const obj = {
-      Author: e.target.elements.autor.value,
-      Title: e.target.elements.title.value,
-      Category: 'New Category',
-      progress: '1',
-    };
-    dispatch(addBook(obj));
-    e.target.elements.autor.value = '';
-    e.target.elements.title.value = '';
+    if (e.target.elements.autor.value && e.target.elements.title.value) {
+      const obj = {
+        Author: e.target.elements.autor.value,
+        Title: e.target.elements.title.value,
+        Category: 'New Category',
+        progress: '1',
+      };
+      dispatch(addBook(obj));
+      e.target.elements.autor.value = '';
+      e.target.elements.title.value = '';
+    }
   };
   return (
     <div className="new-book-form">
