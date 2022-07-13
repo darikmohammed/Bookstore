@@ -10,9 +10,10 @@ function Books() {
   return (
     <div className="books">
       <Nav />
-      {books.map((book) => (
+      {books.map((book, index) => (
         <Book
           key={book.title}
+          bookIndex={index}
           Autor={book.Author}
           Title={book.Title}
           Category={book.Category}

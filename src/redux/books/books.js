@@ -29,7 +29,7 @@ export default (state = intialState, action) => {
       return [...state, action.payload];
 
     case REMOVE_BOOK:
-      return state.filter((book) => action.id !== book.id);
+      return [...state.slice(0, action.id), ...state.slice(action.id + 1)];
 
     default:
       return state;

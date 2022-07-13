@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import PropTypes from 'prop-types';
+import { removeBook } from '../redux/books/books';
 import 'react-circular-progressbar/dist/styles.css';
 import './Styles/Book.css';
 
 function Book({
-  Autor, Title, Category, progress,
+  Autor, Title, Category, progress, bookIndex,
 }) {
+  const dispacth = useDispatch();
+  const handleRemove = () => {
+    dispacth(removeBook(bookIndex));
+  };
   return (
     <div className="book-card">
       <div className="book-content">
@@ -16,9 +22,17 @@ function Book({
           <p className="book-autor">{Autor}</p>
           <ul>
             <li>Comments</li>
-            <li><div className="line" /></li>
-            <li>Remove</li>
-            <li><div className="line" /></li>
+            <li>
+              <div className="line" />
+            </li>
+            <li>
+              <button type="button" onClick={handleRemove}>
+                Remove
+              </button>
+            </li>
+            <li>
+              <div className="line" />
+            </li>
             <li>Edit</li>
           </ul>
         </div>
@@ -56,4 +70,5 @@ Book.propTypes = {
   Title: PropTypes.string.isRequired,
   Category: PropTypes.string.isRequired,
   progress: PropTypes.string.isRequired,
+  bookIndex: PropTypes.number.isRequired,
 };
