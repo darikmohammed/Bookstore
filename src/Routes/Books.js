@@ -1,30 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 import Nav from '../Components/Nav';
 import Book from '../Components/Book';
 import NewBook from '../Components/NewBook';
 import './Styles/Books.css';
 
 function Books() {
-  const [books] = useState([
-    {
-      Author: 'Suzanne Collins',
-      Title: 'The Hunger Games',
-      Category: 'Action',
-      progress: '64',
-    },
-    {
-      Author: 'Frank Herbert',
-      Title: 'Dune',
-      Category: 'Science Fiction',
-      progress: '8',
-    },
-    {
-      Author: 'Suzanne Collins',
-      Title: 'Capital in the Twenty-First Century',
-      Category: 'Economy',
-      progress: '1',
-    },
-  ]);
+  const books = useSelector((state) => state.books, shallowEqual);
   return (
     <div className="books">
       <Nav />

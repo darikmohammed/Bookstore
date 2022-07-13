@@ -1,7 +1,7 @@
 // ACTION
 const ADD_BOOK = 'bookStore/books/ADD';
 const REMOVE_BOOK = 'bookStore/books/REMOVE';
-const intialState = () => [
+const intialState = [
   {
     Author: 'Suzanne Collins',
     Title: 'The Hunger Games',
@@ -21,6 +21,7 @@ const intialState = () => [
     progress: '1',
   },
 ];
+
 // REDUCER
 export default (state = intialState, action) => {
   switch (action.type) {
