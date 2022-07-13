@@ -47,6 +47,14 @@ ul {
   margin: 0.188rem 0.938rem 0.125rem 0;
 }
 
+.book-content .left-content ul li button {
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 .right-content {
   display: flex;
   justify-content: space-between;
