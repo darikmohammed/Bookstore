@@ -13,7 +13,16 @@ export default (state = intialState, action) => {
     case FETCH_BOOK:
       return action.payload;
     case ADD_BOOK:
-      return [...state, action.payload];
+      return {
+        ...state,
+        [action.payload.item_id]: [
+          {
+            title: action.payload.title,
+            author: action.payload.author,
+            category: action.payload.category,
+          },
+        ],
+      };
 
     case REMOVE_BOOK:
       return [...state.slice(0, action.id), ...state.slice(action.id + 1)];
@@ -38,7 +47,9 @@ export const addBook = (payload, baseUrl) => (dispatch) => axios({
     ...payload,
   },
 }).then((response) => {
-  if (response.status === 201) dispatch({ type: 'ADD_BOOK' }, payload);
+  if (response.status === 201) {
+    dispatch({ type: ADD_BOOK, payload });
+  }
 });
 
 export const removeBook = (id, baseUrl) => (dispatch) => axios({
@@ -47,6 +58,7 @@ export const removeBook = (id, baseUrl) => (dispatch) => axios({
 }).then((response) => {
   if (response.status === 201) dispatch({ type: REMOVE_BOOK, id });
 });
+
 const fetch = (payload) => ({ type: FETCH_BOOK, payload });
 export const fetchBook = (baseUrl) => (dispatch) => {
   axios.get(baseUrl).then((response) => {
