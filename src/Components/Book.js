@@ -14,6 +14,7 @@ function Book({
   const handleRemove = () => {
     dispacth(removeBook(bookIndex, `${baseUrl}${apiId}`));
   };
+
   return (
     <div className="book-card">
       <div className="book-content">
