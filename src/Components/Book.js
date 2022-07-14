@@ -69,6 +69,6 @@ Book.propTypes = {
   Autor: PropTypes.string.isRequired,
   Title: PropTypes.string.isRequired,
   Category: PropTypes.string.isRequired,
-  progress: PropTypes.string.isRequired,
-  bookIndex: PropTypes.number.isRequired,
+  progress: PropTypes.number.isRequired,
+  bookIndex: PropTypes.string.isRequired,
 };
