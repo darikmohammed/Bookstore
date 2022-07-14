@@ -5,17 +5,13 @@ import Nav from '../Components/Nav';
 import Book from '../Components/Book';
 import NewBook from '../Components/NewBook';
 import './Styles/Books.css';
+import { baseUrl, apiId } from '../API/BookstoreAPI';
 
 function Books() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(
-      fetchBook(
-        'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/3UK1waVCLV49CbOfUX8b/books',
-      ),
-    );
+    dispatch(fetchBook(`${baseUrl}${apiId}`));
   }, []);
-
   const books = useSelector((state) => state.books, shallowEqual);
   return (
     <div className="books">
