@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import PropTypes from 'prop-types';
 import { removeBook } from '../redux/books/books';
+import { baseUrl, apiId } from '../API/BookstoreAPI';
 import 'react-circular-progressbar/dist/styles.css';
 import './Styles/Book.css';
 
@@ -11,7 +12,7 @@ function Book({
 }) {
   const dispacth = useDispatch();
   const handleRemove = () => {
-    dispacth(removeBook(bookIndex));
+    dispacth(removeBook(bookIndex, `${baseUrl}${apiId}`));
   };
   return (
     <div className="book-card">

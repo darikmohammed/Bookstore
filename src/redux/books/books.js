@@ -25,7 +25,14 @@ export default (state = intialState, action) => {
       };
 
     case REMOVE_BOOK:
-      return [...state.slice(0, action.id), ...state.slice(action.id + 1)];
+      return Object.keys(state)
+        .filter((key) => key !== action.id)
+        .reduce(
+          (obj, key) => Object.assign(obj, {
+            [key]: state[key],
+          }),
+          {},
+        );
 
     default:
       return state;
@@ -53,7 +60,7 @@ export const addBook = (payload, baseUrl) => (dispatch) => axios({
 });
 
 export const removeBook = (id, baseUrl) => (dispatch) => axios({
-  method: 'POST',
+  method: 'DELETE',
   url: `${baseUrl}/${id}`,
 }).then((response) => {
   if (response.status === 201) dispatch({ type: REMOVE_BOOK, id });
