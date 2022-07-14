@@ -40,13 +40,6 @@ export default (state = intialState, action) => {
 };
 // ACTION CREATOR
 
-// export const addBook = (payload) => ({
-//   type: ADD_BOOK,
-//   payload,
-// });
-
-// export const removeBook = (id) => ({ type: REMOVE_BOOK, id });
-
 export const addBook = (payload, baseUrl) => (dispatch) => axios({
   method: 'POST',
   url: baseUrl,
