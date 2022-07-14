@@ -1,35 +1,38 @@
+import axios from 'axios';
+
 // ACTION
 const ADD_BOOK = 'bookStore/books/ADD';
 const REMOVE_BOOK = 'bookStore/books/REMOVE';
-const intialState = [
-  {
-    Author: 'Suzanne Collins',
-    Title: 'The Hunger Games',
-    Category: 'Action',
-    progress: '64',
-  },
-  {
-    Author: 'Frank Herbert',
-    Title: 'Dune',
-    Category: 'Science Fiction',
-    progress: '8',
-  },
-  {
-    Author: 'Suzanne Collins',
-    Title: 'Capital in the Twenty-First Century',
-    Category: 'Economy',
-    progress: '1',
-  },
-];
+const FETCH_BOOK = 'bookStore/books/FETCH';
+
+const intialState = {};
 
 // REDUCER
 export default (state = intialState, action) => {
   switch (action.type) {
+    case FETCH_BOOK:
+      return action.payload;
     case ADD_BOOK:
-      return [...state, action.payload];
+      return {
+        ...state,
+        [action.payload.item_id]: [
+          {
+            title: action.payload.title,
+            author: action.payload.author,
+            category: action.payload.category,
+          },
+        ],
+      };
 
     case REMOVE_BOOK:
-      return [...state.slice(0, action.id), ...state.slice(action.id + 1)];
+      return Object.keys(state)
+        .filter((key) => key !== action.id)
+        .reduce(
+          (obj, key) => Object.assign(obj, {
+            [key]: state[key],
+          }),
+          {},
+        );
 
     default:
       return state;
@@ -37,9 +40,29 @@ export default (state = intialState, action) => {
 };
 // ACTION CREATOR
 
-export const addBook = (payload) => ({
-  type: ADD_BOOK,
-  payload,
+export const addBook = (payload, baseUrl) => (dispatch) => axios({
+  method: 'POST',
+  url: baseUrl,
+  data: {
+    ...payload,
+  },
+}).then((response) => {
+  if (response.status === 201) {
+    dispatch({ type: ADD_BOOK, payload });
+  }
 });
 
-export const removeBook = (id) => ({ type: REMOVE_BOOK, id });
+export const removeBook = (id, baseUrl) => (dispatch) => axios({
+  method: 'DELETE',
+  url: `${baseUrl}/${id}`,
+}).then((response) => {
+  if (response.status === 201) dispatch({ type: REMOVE_BOOK, id });
+});
+
+const fetch = (payload) => ({ type: FETCH_BOOK, payload });
+export const fetchBook = (baseUrl) => (dispatch) => {
+  axios.get(baseUrl).then((response) => {
+    // handle success
+    dispatch(fetch(response.data));
+  });
+};

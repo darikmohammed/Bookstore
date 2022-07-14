@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { v4 as uuid4 } from 'uuid';
 import { addBook } from '../redux/books/books';
+import { baseUrl, apiId } from '../API/BookstoreAPI';
 import './Styles/NewBook.css';
 
 function NewBook() {
   const [title, setTitle] = useState('');
-  const [autor, setAutor] = useState('');
+  const [author, setAuthor] = useState('');
   const dispatch = useDispatch();
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
   const handleAutorChange = (e) => {
-    setAutor(e.target.value);
+    setAuthor(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target.elements.autor.value && e.target.elements.title.value) {
+      const id = uuid4();
       const obj = {
-        Author: autor,
-        Title: title,
-        Category: 'New Category',
-        progress: '1',
+        item_id: id,
+        title,
+        author,
+        category: 'Fiction',
       };
-      dispatch(addBook(obj));
+      dispatch(addBook(obj, `${baseUrl}${apiId}`));
       setTitle('');
-      setAutor('');
+      setAuthor('');
     }
   };
   return (
@@ -45,7 +48,7 @@ function NewBook() {
           placeholder="Book autor"
           className="book-autor"
           name="autor"
-          value={autor}
+          value={author}
           onChange={handleAutorChange}
         />
         <button type="submit" className="form-btn">
