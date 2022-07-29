@@ -16,7 +16,7 @@
 
 ## Live Demo
 
-[Netlify Live Demo Link]()
+[Netlify Live Demo Link](https://book-store-app-microverse.herokuapp.com/)
 
 ## Getting Started
 
